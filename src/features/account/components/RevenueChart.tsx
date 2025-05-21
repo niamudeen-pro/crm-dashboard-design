@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { Calendar } from "lucide-react";
 import {
     Bar,
     BarChart,
@@ -8,16 +7,9 @@ import {
     XAxis,
     YAxis,
 } from "recharts";
-import { Button } from "@/components/ui/button";
-import {
-    Select,
-    SelectContent,
-    SelectItem,
-    SelectTrigger,
-    SelectValue,
-} from "@/components/ui/select";
-import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { cn } from "@/lib/utils";
+import CustomTabs from "@/components/shared/CustomTabs";
+import CustomSelect from "@/components/shared/CustomSelect";
+import CustomCalendar from "@/components/shared/CustomCalender";
 
 const MONTHLY_DATA = [
     { name: "Jan", value: 559.12 },
@@ -56,54 +48,18 @@ export default function RevenueChart() {
     const [activeTab, setActiveTab] = useState("revenue");
     return (
         <div className="w-full bg-accent border rounded-2xl">
-            <div className="p-4">
+            <div>
                 {/* Header controls */}
-                <div className="flex flex-col md:flex-row justify-between md:items-center mb-6 space-y-4">
-                    <Tabs defaultValue="revenue" onValueChange={setActiveTab}>
-                        <TabsList className="border py-5">
-                            {TABS.map((tab) => (
-                                <TabsTrigger
-                                    key={tab.value}
-                                    value={tab.value}
-                                    className={cn(
-                                        "capitalize p-5 cursor-pointer rounded-lg",
-                                        "text-gray-700 dark:text-gray-300",
-                                        "data-[state=active]:bg-white data-[state=active]:text-black",
-                                        "dark:data-[state=active]:bg-purple-600 dark:data-[state=active]:text-white"
-                                    )}
-                                >
-                                    {tab.label}
-                                </TabsTrigger>
-                            ))}
-                        </TabsList>
-                    </Tabs>
+                <div className="flex  flex-col items-start sm:flex-row justify-between gap-4 px-4 py-3 mb-4 border-b">
+                    <CustomTabs tabs={TABS} setActiveTab={setActiveTab} />
                     <div className="flex gap-2">
-                        <Select defaultValue="all">
-                            <SelectTrigger className="w-[180px] bg-background">
-                                <SelectValue placeholder="All Categories" />
-                            </SelectTrigger>
-                            <SelectContent>
-                                {CATEGORIES.map((cat) => (
-                                    <SelectItem
-                                        key={cat.value}
-                                        value={cat.value}
-                                        className="capitalize cursor-pointer"
-                                    >
-                                        {cat.label}
-                                    </SelectItem>
-                                ))}
-                            </SelectContent>
-                        </Select>
-
-                        <Button variant="outline" className="gap-2">
-                            Jun 2023
-                            <Calendar className="h-4 w-4" />
-                        </Button>
+                        <CustomSelect options={CATEGORIES} selected={CATEGORIES[0]?.label} className="w-[146px] bg-background" />
+                        <CustomCalendar dateFormat={{ options: { year: "numeric", month: "short" } }} />
                     </div>
                 </div>
 
                 {/* Title and total revenue */}
-                <div className="flex justify-between items-center mb-4">
+                <div className="flex justify-between items-center mb-4 px-5">
                     <h2 className="text-xl font-semibold capitalize">{activeTab}</h2>
                     <div className="text-sm text-muted-foreground">
                         Total Revenue:{" "}

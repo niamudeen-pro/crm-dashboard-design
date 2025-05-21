@@ -10,7 +10,7 @@ import { Input } from "@/components/ui/input";
 import LOGO from "../../assets/logo.svg";
 import OPEN_TOGGLE_ICON from "../../assets/layout_leftbar_open_fill.svg";
 import CLOSE_TOGGLE_ICON from "../../assets/layout_leftbar_close_fill.svg";
-import { ModeToggle } from "../mode-toggle";
+import { ThemeToggle } from "../theme-toggle";
 import { useTheme } from "../theme-provider";
 import { IoNotifications } from "react-icons/io5";
 import { IoSearchSharp } from "react-icons/io5";
@@ -18,7 +18,6 @@ import { HiChevronDown } from "react-icons/hi2";
 import { Menu } from "lucide-react";
 import { SUPER_ADMIN } from "@/constants";
 import { Link } from "react-router-dom";
-import { useOutsideToggle } from "@/hooks/useOutsideToggle";
 
 
 export default function TopBar() {
@@ -64,38 +63,38 @@ function Header({ handleSidebarToggle }: { handleSidebarToggle: () => void }) {
             {/* Desktop Menu  With Logo */}
             <div className="hidden lg:flex items-center gap-[86px]">
                 <BrandLogo />
-                <button onClick={handleSidebarToggle} className="cursor-pointer border p-[6px] rounded-full">
-                    <img src={toggleIcon} alt="Toggle Sidebar" className="h-5 w-5 hidden md:block" />
+                <button onClick={handleSidebarToggle} className="cursor-pointer border size-7 flex__center rounded-full">
+                    <img src={toggleIcon} alt="Toggle Sidebar" className="size-4 hidden md:block" />
                 </button>
             </div>
             {/* Search Bar */}
-            <div className="hidden md:flex relative max-w-md w-full">
+            <div className="hidden md:flex relative max-w-[608px] w-full">
                 <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
                     <IoSearchSharp size={20} className="text-gray-400" />
                 </div>
-                <Input placeholder="Search" className="pl-10 rounded-xl dark:!bg-accent" />
+                <Input placeholder="Search" className="pl-10 rounded-xl dark:!bg-accent focus-within:ring-1" />
             </div>
-            <UserSection />
+            <UserActions />
         </header>
     );
 }
 
-function UserSection() {
-    const { open, setOpen, ref } = useOutsideToggle();
+function UserActions() {
 
     const initials = SUPER_ADMIN.NAME.split(" ")
         .map((n) => n[0])
         .join("");
 
     return (
-        <div className="flex items-center gap-4 relative" ref={ref}>
+        <div className="flex items-center gap-4 relative">
+            <ThemeToggle />
             {/* Notification Button */}
             <button className="relative drop__shadow p-2 rounded-xl border">
-                <IoNotifications size={20} className="cursor-pointer" />
+                <IoNotifications size={20} className="cursor-pointer dark:text-[#FFFFFFCC]" />
             </button>
 
             {/* User Avatar and Dropdown Toggle */}
-            <div className="flex items-center gap-2  cursor-pointer" onClick={() => setOpen(!open)}>
+            <div className="flex items-center gap-2">
                 <Avatar className="h-8 w-8 border">
                     <AvatarImage src="/placeholder.svg" alt={SUPER_ADMIN.NAME} />
                     <AvatarFallback className="bg-primary text-white text-xs">
@@ -108,13 +107,6 @@ function UserSection() {
                 </div>
                 <HiChevronDown className="h-4 w-4" />
             </div>
-
-            {/* Dropdown */}
-            {open && (
-                <div className="absolute top-12 border right-0 z-10 bg-background rounded-md shadow-md p-3 w-40">
-                    <ModeToggle />
-                </div>
-            )}
         </div>
     );
 }

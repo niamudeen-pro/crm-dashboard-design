@@ -23,7 +23,8 @@
     --muted: 210 40% 96.1%;
     --muted-foreground: 215.4 16.3% 46.9%;
 
-    --accent: 210 40% 96.1%;
+    --accent: 206, 17%, 97%, 1;
+    /* --accent: 210 40% 96.1%; */
     --accent-foreground: 222.2 47.4% 11.2%;
 
     --destructive: 0 84.2% 60.2%;
@@ -50,7 +51,8 @@
     --popover: 222.2 47.4% 11.2%;
     --popover-foreground: 210 40% 98%;
 
-    --primary: 246 80% 60%;
+    --primary: 245, 100%, 74%, 1;
+    /* --primary: 246 80% 60%; */
     --primary-foreground: 0 0% 100%;
 
     --secondary: 217.2 32.6% 17.5%;
@@ -86,26 +88,68 @@
 }
 
 @layer utilities {
-  .scrollbar-hidden::-webkit-scrollbar {
-    display: none;
-  }
-
-  .scrollbar-hidden {
-    -ms-overflow-style: none;
-    scrollbar-width: none;
-  }
-  .flex_center {
+  /* Flex utilities */
+  .flex__center {
     @apply flex justify-center items-center;
   }
+
   .flex__between {
     @apply flex justify-between items-center;
   }
-}
-input:focus {
-  outline: none;
-  box-shadow: none; /* custom blue focus ring */
+
+  /* Scrollbar hidden */
+  .scrollbar__hidden {
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+  }
+
+  /* Typography */
+  .block__heading {
+    @apply text-lg font-semibold text-gray-800 capitalize dark:text-white whitespace-nowrap;
+  }
 }
 
+/* Input & Select focus styles */
+input:focus,
+select:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+/* Shadows */
 .drop__shadow {
   box-shadow: 1px 1px 3px 0px #00000026;
+}
+
+.order__status__shadow {
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+}
+
+.stats__carousel__item {
+  box-shadow: 0px 3px 6px 0px #0000000f !important;
+}
+
+/* Specific Chart sizing */
+.order__status__chart .recharts-wrapper {
+  width: 300px !important;
+  height: 300px !important;
+}
+
+/* Custom borders */
+.custom__phone__input__border {
+  border: 0.66px solid #0e253c4d;
+  box-shadow: 0px 1px 1px 0px #1a1a1a14;
+}
+
+/* Number input spinner removal */
+/* Chrome, Safari, Edge, Opera */
+.no-spinner::-webkit-outer-spin-button,
+.no-spinner::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+.no-spinner {
+  -moz-appearance: textfield;
 }
