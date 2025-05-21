@@ -1,8 +1,8 @@
 import AccountCard from "@/features/account/components/AccountCard";
 import AccountButtonGrid from "@/features/account/components/AccountButtonGrid";
-import Tabs from "@/features/account/components/Tabs";
 import { ACCOUNT_USER } from "@/constants";
 import AccountDetails from "@/features/account/components/AccountDetails";
+import TabsLayout from "@/features/account/components/Tabs";
 
 export default function AccountPage() {
     return (
@@ -21,7 +21,7 @@ export default function AccountPage() {
 
             {/* Right Panel */}
             <div className="w-full max-w-full overflow-x-auto">
-                <Tabs />
+                <TabsLayout />
             </div>
         </div>
     );

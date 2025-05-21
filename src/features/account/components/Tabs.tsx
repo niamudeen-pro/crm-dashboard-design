@@ -8,7 +8,7 @@ import RevenueChart from "./RevenueChart";
 import StatsCarousel from "./StatsCarousel";
 
 
-export default function Tabs() {
+export default function TabsLayout() {
     const [activeTab, setActiveTab] = useState("dashboard");
     return (
         <div className="w-full">
@@ -18,6 +18,13 @@ export default function Tabs() {
     );
 }
 
+
+// -----------------------------------------------
+//  These are helper components used in JSX below, This keeps the main component cleaner and easier to read
+// -----------------------------------------------
+
+
+
 function TabList({
     activeTab,
     setActiveTab,
@@ -26,7 +33,7 @@ function TabList({
     setActiveTab: (tab: string) => void;
 }) {
     return (
-        <div className="flex overflow-x-auto items-end space-x-1 w-full">
+        <div className="flex overflow-x-auto items-end space-x-1 w-full scrollbar__hidden">
             {ACCOUNT_TABS.map(({ label, value }) => {
                 const isActive = activeTab === value;
                 return (

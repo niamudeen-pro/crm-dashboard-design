@@ -69,7 +69,7 @@ export default function StatsCarousel() {
 
 function StatCard({ stat }: { stat: StatCard }) {
     return (
-        <div className="border w-full border-b-0 rounded-2xl bg-accent">
+        <div className="w-full rounded-2xl bg-accent stats__carousel__item overflow-hidden border">
             {/* Top section: Icon + Title + Value */}
             <div className="flex gap-4 p-5">
                 <div className="p-[15px] flex__center border-[#FF2164] border rounded-xl">

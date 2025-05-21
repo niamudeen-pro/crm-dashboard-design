@@ -126,7 +126,7 @@ select:focus {
 }
 
 .stats__carousel__item {
-  box-shadow: 0px 3px 6px 0px #0000000f !important;
+  box-shadow: 0px 3px 6px 0px #0000000f;
 }
 
 /* Specific Chart sizing */
